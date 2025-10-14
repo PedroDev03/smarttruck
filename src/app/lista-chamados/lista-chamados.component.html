@@ -1,0 +1,37 @@
+<div class="page-container">
+    <header class="page-header">
+      <h2>Chamados em aberto</h2>
+      <button mat-icon-button aria-label="Filtrar chamados">
+        <mat-icon>tune</mat-icon>
+      </button>
+    </header>
+  
+    <div class="ticket-list">
+      <mat-card class="ticket-card" *ngFor="let chamado of chamados">
+        <div class="ticket-layout">
+          <div class="ticket-image-placeholder"></div>
+          
+          <div class="ticket-details">
+            <mat-card-title>{{ chamado.titulo }}</mat-card-title>
+            <mat-card-subtitle>{{ chamado.status }}</mat-card-subtitle>
+            <p class="ticket-description">
+              {{ chamado.descricao }}
+            </p>
+            <mat-card-actions>
+              <button mat-flat-button color="primary">Ver</button>
+            </mat-card-actions>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+  
+    <footer class="pagination-controls">
+      <button mat-stroked-button class="active">1</button>
+      <button mat-stroked-button>2</button>
+      <button mat-stroked-button>3</button>
+      <span>...</span>
+      <button mat-stroked-button>9</button>
+      <button mat-stroked-button>10</button>
+    </footer>
+  
+  </div>

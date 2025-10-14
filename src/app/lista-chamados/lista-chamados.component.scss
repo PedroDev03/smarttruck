@@ -1,0 +1,120 @@
+/* :host garante que os estilos de fundo cubram toda a área do componente, 
+   simulando o fundo azul onde o container branco fica */
+   :host {
+    display: block;
+    background-color: #3f51b5; /* Cor azul escura de fundo (simulando a barra lateral) */
+    padding: 2rem;
+    min-height: 100vh;
+  }
+  
+  .page-container {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  }
+  
+  /* 1. Estilos do Cabeçalho */
+  .page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 1rem;
+  
+    h2 {
+      margin: 0;
+      font-size: 1.5rem;
+      font-weight: 500;
+    }
+  
+    mat-icon {
+      transform: scale(1.2); /* Ícone um pouco maior */
+    }
+  }
+  
+  /* 2. Estilos da Lista de Chamados */
+  .ticket-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem; /* Espaço entre os cards */
+  }
+  
+  .ticket-card {
+    /* Removemos o preenchimento padrão do mat-card para controlar com nosso layout */
+    padding: 0;
+  }
+  
+  .ticket-layout {
+    display: flex;
+    align-items: flex-start;
+    padding: 1.5rem; /* Nosso preenchimento interno */
+  }
+  
+  .ticket-image-placeholder {
+    width: 100px;
+    height: 100px;
+    background-color: #e0e0e0;
+    border-radius: 8px;
+    margin-right: 1.5rem;
+    flex-shrink: 0; /* Impede que o placeholder encolha */
+  }
+  
+  .ticket-details {
+    flex: 1;
+  
+    mat-card-title {
+      font-size: 1.2rem;
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+    
+    mat-card-subtitle {
+      font-size: 0.9rem;
+      color: #6c757d;
+      margin-bottom: 1rem;
+    }
+  
+    .ticket-description {
+      font-size: 0.95rem;
+      line-height: 1.5;
+      color: #495057;
+    }
+  
+    mat-card-actions {
+      /* Alinha o botão "Ver" */
+      padding: 0;
+      margin-top: 1rem;
+    }
+  }
+  
+  /* 3. Estilos da Paginação */
+  .pagination-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #eee;
+  
+    button {
+      min-width: 40px;
+      width: 40px;
+      height: 40px;
+      padding: 0;
+      border-radius: 8px;
+  
+      &.active {
+        background-color: #f4f4f4;
+        border-color: #ccc;
+        font-weight: bold;
+      }
+    }
+  
+    span {
+      margin: 0 0.5rem;
+      color: #999;
+    }
+  }
