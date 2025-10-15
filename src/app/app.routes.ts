@@ -1,16 +1,14 @@
 // src/app/app.routes.ts
 
 import { Routes } from '@angular/router';
-// 1. Importe o seu componente de login
-import { LoginComponent } from './login/login.component'; 
+import { LoginComponent } from './login/login.component';
+// 1. Importe o componente da lista de chamados
+import { ListaChamadosComponent } from './lista-chamados/lista-chamados.component';
 
 export const routes: Routes = [
-  // 2. Adicione a nova regra (a rota)
-  { 
-    path: 'login', // Quando a URL for '/login'
-    component: LoginComponent // Mostre este componente
-  }
-
-  // ...aqui você pode adicionar outras rotas
-  // Ex: { path: 'home', component: HomeComponent }
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },
+  
+  // 2. Adicione a nova rota aqui
+  { path: 'chamados', component: ListaChamadosComponent }
 ];

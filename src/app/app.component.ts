@@ -3,9 +3,13 @@ import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from "./navbar/navbar.component";
 import { ListaChamadosComponent } from "./lista-chamados/lista-chamados.component";
 
+// src/app/app.component.ts
+// ...
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, NavbarComponent, ListaChamadosComponent],
+  standalone: true,
+  // Remova o ListaChamadosComponent daqui
+  imports: [RouterOutlet, NavbarComponent], 
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

@@ -1,4 +1,19 @@
-<p>navbar works!</p>
+<mat-toolbar color="primary">
+  <div class="navbar-container">
+    <div class="navbar-brand">
+      <a routerLink="/">Minha Aplicação</a>
+    </div>
 
+    <div class="navbar-links" [class.show-menu]="menuAberto">
+      <a mat-button routerLink="/inicio" routerLinkActive="active-link">Início</a>
+      <a mat-button routerLink="/sobre" routerLinkActive="active-link">Sobre</a>
+      <a mat-button routerLink="/contato" routerLinkActive="active-link">Contato</a>
+    </div>
 
-<h1>smarttruck</h1>
+    <div class="hamburger-menu">
+      <button mat-icon-button (click)="toggleMenu()">
+        <mat-icon>{{ menuAberto ? 'close' : 'menu' }}</mat-icon>
+      </button>
+    </div>
+  </div>
+</mat-toolbar>
