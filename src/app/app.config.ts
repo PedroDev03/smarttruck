@@ -2,15 +2,15 @@
 
 import { ApplicationConfig } from '@angular/core';
 import { provideRouter } from '@angular/router';
+import { provideHttpClient } from '@angular/common/http'; // 1. IMPORTE AQUI
 
-// 1. Importe suas rotas
 import { routes } from './app.routes';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    // 2. "Forneça" as rotas para a aplicação
-    provideRouter(routes) 
-    
-    // ...outros providers como provideHttpClient() etc.
+    provideRouter(routes),
+    provideAnimationsAsync(),
+    provideHttpClient() // 2. ADICIONE AQUI
   ]
 };

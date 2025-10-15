@@ -1,6 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { Router } from '@angular/router'; // 1. Importe o Router para navegar
+import { HttpErrorResponse } from '@angular/common/http';
+import { AuthService, UserResponse } from '../services/auth.service';
 
 // Importações do Angular Material
 import { MatCardModule } from '@angular/material/card';
@@ -27,29 +30,46 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class LoginComponent {
   loginForm: FormGroup;
-  hidePassword = true; // Controla a visibilidade da senha
+  hidePassword = true;
 
-  // 2. Injete o FormBuilder para criar o formulário
-  constructor(private fb: FormBuilder) {
+  // 3. Injete o FormBuilder, seu AuthService e o Router
+  private fb = inject(FormBuilder);
+  private authService = inject(AuthService);
+  private router = inject(Router);
+
+  constructor() {
     this.loginForm = this.fb.group({
-      // 3. Defina os campos e suas validações
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]]
+      password: ['', [Validators.required]]
     });
   }
 
-  // 4. Método chamado quando o formulário é enviado
+  // 4. Modifique o método onSubmit para chamar o serviço
   onSubmit(): void {
-    if (this.loginForm.valid) {
-      console.log('Formulário enviado!');
-      console.log('Dados:', this.loginForm.value);
-      // Aqui você colocaria a lógica para autenticar com um backend
-    } else {
-      console.log('Formulário inválido.');
+    if (this.loginForm.invalid) {
+      return;
     }
+
+    this.authService.login(this.loginForm.value).subscribe({
+      // 3. ADICIONE O TIPO UserResponse AQUI
+      next: (response: UserResponse) => {
+        console.log('Login bem-sucedido!', response);
+        alert(`Login realizado com sucesso! Bem-vindo, ${response.email}`);
+        this.router.navigate(['/chamados']);
+      },
+      // 4. ADICIONE O TIPO HttpErrorResponse AQUI
+      error: (err: HttpErrorResponse) => {
+        console.error('Erro no login:', err);
+        // Podemos até verificar o status do erro
+        if (err.status === 401) {
+          alert('Email ou senha incorretos. Tente novamente.');
+        } else {
+          alert('Ocorreu um erro inesperado. Tente novamente mais tarde.');
+        }
+      }
+    });
   }
 
-  // Método para alternar a visibilidade da senha
   togglePasswordVisibility(): void {
     this.hidePassword = !this.hidePassword;
   }
