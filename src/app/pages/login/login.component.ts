@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router'; // 1. Importe o Router para navegar
 import { HttpErrorResponse } from '@angular/common/http';
-import { AuthService, UserResponse } from '../services/auth.service';
+import { AuthService, UserResponse } from '../../auth/services/auth.service';
 
 // Importações do Angular Material
 import { MatCardModule } from '@angular/material/card';
