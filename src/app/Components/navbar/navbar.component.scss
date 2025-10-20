@@ -19,7 +19,8 @@
   transition: color 0.3s;
 }
 
-.navbar-links a:hover, .active-link {
+.navbar-links a:hover,
+.active-link {
   color: #ffd740; /* Cor de destaque ao passar o mouse ou quando o link está ativo */
   font-weight: bold;
 }
@@ -39,6 +40,12 @@
     width: 100%;
     background-color: #3f51b5; /* Mesma cor da toolbar */
     padding: 1rem 0;
+    
+    /* --- A CORREÇÃO ESTÁ AQUI ---
+      Adicione um z-index alto para garantir que o menu
+      fique sobreposto a qualquer outro conteúdo da página.
+    */
+    z-index: 100;
   }
 
   .navbar-links.show-menu {

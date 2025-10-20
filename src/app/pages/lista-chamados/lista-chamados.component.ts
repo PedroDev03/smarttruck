@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { NavbarComponent } from '../../Components/navbar/navbar.component';
 // Importações do Angular Material
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -13,7 +13,8 @@ import { MatIconModule } from '@angular/material/icon';
     CommonModule,
     MatCardModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    NavbarComponent
   ],
   templateUrl: './lista-chamados.component.html',
   styleUrls: ['./lista-chamados.component.scss']

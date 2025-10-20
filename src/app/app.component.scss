@@ -1,0 +1,34 @@
+/* app.component.scss */
+
+/* Faz o app-root (a aplicação inteira) ocupar a tela 
+   toda no formato de coluna (um item em cima do outro) */
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* 100% da altura da tela */
+}
+
+/* Garante que a navbar não encolha */
+app-navbar {
+  flex-shrink: 0;
+}
+
+/* Esta é a nova classe que você criou no HTML */
+.main-content-area {
+  flex-grow: 1; /* Faz esta área ocupar TODO o espaço restante (abaixo da navbar) */
+  overflow-y: auto; /* Adiciona scroll SÓ aqui, se o conteúdo for muito grande */
+  
+  /* --- AQUI ESTÁ A LÓGICA --- */
+  
+  /* Traz o fundo azul que estava no :host do "chamados" */
+  background-color: #284e80;
+  
+  /* Traz o padding e a centralização HORIZONTAL */
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  
+  /* --- A CORREÇÃO PRINCIPAL --- */
+  /* Alinhe o conteúdo ao TOPO (flex-start), não ao centro */
+  align-items: flex-start; 
+}
