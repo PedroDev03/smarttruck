@@ -8,7 +8,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common'; // Necessário para ngIf, ngFor, etc.
-
+import { Output, EventEmitter } from '@angular/core';
 @Component({
   selector: 'app-navbar',
   standalone: true, // Garanta que 'standalone' está como true
@@ -26,8 +26,11 @@ import { CommonModule } from '@angular/common'; // Necessário para ngIf, ngFor,
 })
 export class NavbarComponent {
   menuAberto = false;
+// 2. Crie o "disparador" de evento
+  @Output() menuToggle = new EventEmitter<void>();
 
-  toggleMenu() {
-    this.menuAberto = !this.menuAberto;
+  // 3. Crie a função que o seu botão VAI CHAMAR
+  onMenuClick(): void {
+    this.menuToggle.emit(); // Isso dispara o (menuToggle) no app.component.html
   }
 }

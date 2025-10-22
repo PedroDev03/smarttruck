@@ -1,35 +1,49 @@
+// src/app/app.component.ts
+
 import { Component, inject } from '@angular/core';
 import { NavbarComponent } from "./Components/navbar/navbar.component";
-import { ListaChamadosComponent } from "./pages/lista-chamados/lista-chamados.component";
 import { RouterOutlet, Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
-
+import { CommonModule } from '@angular/common';
+import { SidebarComponent } from './Components/barra-lateral/barra-lateral.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  // Remova o ListaChamadosComponent daqui
-  imports: [RouterOutlet, NavbarComponent], 
+  imports: [
+    CommonModule, 
+    RouterOutlet, 
+    NavbarComponent, 
+    SidebarComponent, 
+    MatSidenavModule
+  ], 
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
   title = 'smarttruck';
-  showNavbar = true;
-  private router = inject(Router)
+  
+  // 1. Variáveis de controle (SÓ ESTAS DUAS)
+  showLayout = true;  // Controla se o layout INTEIRO aparece (para sumir no login)
+  isSidebarOpen = true; // Controla se a sidebar está aberta ou fechada
+  
+  private router = inject(Router);
 
   constructor() {
+    // 2. UMA ÚNICA INSCRIÇÃO para controlar o layout
     this.router.events.pipe(
-      // Filtre apenas os eventos de "Navegação Concluída"
       filter(event => event instanceof NavigationEnd)
     ).subscribe(event => {
-      // 6. Verifique a URL
       if (event instanceof NavigationEnd) {
-        // Se a URL for '/login', esconda a navbar. Senão, mostre.
-        this.showNavbar = (event.url !== '/login');
-        
-        // Se sua rota de login for outra, ex: '/auth/login', mude acima.
+        // Se a URL for '/login', esconde o layout. Senão, mostra.
+        this.showLayout = (event.url !== '/login');
       }
     });
+  }
+
+  // 3. Função para ser chamada pelo evento da SIDEBAR
+  toggleSidebar(): void {
+    this.isSidebarOpen = !this.isSidebarOpen;
   }
 }

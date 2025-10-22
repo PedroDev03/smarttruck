@@ -1,19 +1,29 @@
+
+.navbar-toolbar {
+  background-color: HEX #d5d5d5;
+}
 .navbar-container {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: center; /* Boa prática adicionar isso */
   width: 100%;
+  color: rgba(0, 0, 0, 0.96);
+  /* Adicione padding para o conteúdo não colar nas bordas */
+  padding: 0 3rem;
+  box-sizing: border-box; /* Garante que o padding não estoure a largura */
+ 
 }
 
 .navbar-brand a {
-  color: white;
+ 
   text-decoration: none;
   font-size: 1.5rem;
   font-weight: bold;
+  align-items: flex-end;
 }
 
 .navbar-links a {
-  color: white;
+  
   text-decoration: none;
   margin: 0 10px;
   transition: color 0.3s;
@@ -38,7 +48,7 @@
     top: 64px; /* Altura da toolbar */
     left: 0;
     width: 100%;
-    background-color: #3f51b5; /* Mesma cor da toolbar */
+    background-color: HEX #d5d5d5;
     padding: 1rem 0;
     
     /* --- A CORREÇÃO ESTÁ AQUI ---

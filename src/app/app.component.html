@@ -1,5 +1,21 @@
-<app-navbar *ngIf="showNavbar"></app-navbar>
+<mat-sidenav-container *ngIf="showLayout">
 
-<div class="main-content-area">
-  <router-outlet></router-outlet>
-</div>
+  <mat-sidenav mode="side" [opened]="isSidebarOpen">
+    
+    <app-sidebar></app-sidebar> 
+
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    
+    <app-navbar (menuToggle)="toggleSidebar()"></app-navbar>
+
+    <div class="main-content-area">
+      <router-outlet></router-outlet>
+    </div>
+
+  </mat-sidenav-content>
+
+</mat-sidenav-container>
+
+<router-outlet *ngIf="!showLayout"></router-outlet>
