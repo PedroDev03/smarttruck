@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from '../../Components/navbar/navbar.component';
+import { FilterComponent } from '../../Components/filter/filter.component';
 // Importações do Angular Material
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -14,12 +15,14 @@ import { MatIconModule } from '@angular/material/icon';
     MatCardModule,
     MatButtonModule,
     MatIconModule,
-    NavbarComponent
+    NavbarComponent,
+    FilterComponent
   ],
   templateUrl: './lista-chamados.component.html',
   styleUrls: ['./lista-chamados.component.scss']
 })
 export class ListaChamadosComponent {
+
 
   // Dados fictícios para simular a lista de chamados
   chamados = [
@@ -39,5 +42,26 @@ export class ListaChamadosComponent {
       descricao: 'Body text for whatever you\'d like to say. Add main takeaway points, quotes, anecdotes, or even a very very short story.'
     }
   ];
+
+  // filtered view
+  filteredChamados = [...this.chamados];
+
+  onFilterChange(filter: { search?: string; status?: string }) {
+    const search = (filter.search || '').toLowerCase().trim();
+    const status = filter.status || 'all';
+
+    this.filteredChamados = this.chamados.filter((c) => {
+      const matchesSearch = !search || (
+        (c.titulo && c.titulo.toLowerCase().includes(search)) ||
+        (c.descricao && c.descricao.toLowerCase().includes(search)) ||
+        (c.status && c.status.toLowerCase().includes(search))
+      );
+
+      // For demo data, status values are free-form; in real app adapt accordingly
+      const matchesStatus = status === 'all' || (c.status && c.status.toLowerCase().includes(status));
+
+      return matchesSearch && matchesStatus;
+    });
+  }
 
 }

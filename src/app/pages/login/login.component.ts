@@ -54,7 +54,7 @@ export class LoginComponent {
       // 3. ADICIONE O TIPO UserResponse AQUI
       next: (response: UserResponse) => {
         console.log('Login bem-sucedido!', response);
-        alert(`Login realizado com sucesso! Bem-vindo, ${response.email}`);
+        alert(`Login realizado com sucesso! Bem-vindo.`);
         this.router.navigate(['/chamados']);
       },
       // 4. ADICIONE O TIPO HttpErrorResponse AQUI

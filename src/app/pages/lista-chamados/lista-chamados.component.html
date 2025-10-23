@@ -7,8 +7,10 @@
       </button>
     </header>
   
+    <app-filter (filterChange)="onFilterChange($event)"></app-filter>
+  
     <div class="ticket-list">
-      <mat-card class="ticket-card" *ngFor="let chamado of chamados">
+      <mat-card class="ticket-card" *ngFor="let chamado of filteredChamados">
         <div class="ticket-layout">
           <div class="ticket-image-placeholder"></div>
           

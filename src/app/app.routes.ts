@@ -2,13 +2,13 @@
 
 import { Routes } from '@angular/router';
 import { LoginComponent } from './pages/login/login.component';
-// 1. Importe o componente da lista de chamados
 import { ListaChamadosComponent } from './pages/lista-chamados/lista-chamados.component';
+import { UsuariosComponent } from './pages/usuarios/usuarios.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   
-  // 2. Adicione a nova rota aqui
+  {path: 'usuarios', component: UsuariosComponent},
   { path: 'chamados', component: ListaChamadosComponent }
 ];
