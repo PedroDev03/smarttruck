@@ -1,9 +1,18 @@
 /* src/app/sidebar/sidebar.component.scss */
 
+/* 1. FAÇA O CONTAINER PRINCIPAL OCUPAR 100% DA ALTURA */
+:host {
+  display: flex;
+  flex-direction: column;
+  /* Garante que o componente ocupe 100% da altura da <mat-sidenav> */
+  height: 100%; 
+}
+
 .sidebar-header {
   padding: 1rem;
   text-align: center;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  flex-shrink: 0; /* Impede o header de encolher */
   
   h2 {
     margin: 0;
@@ -11,24 +20,58 @@
   }
 }
 
+/* 2. FAÇA A LISTA "CRESCER" E SER UM CONTAINER FLEX */
+mat-nav-list {
+  display: flex;
+  flex-direction: column; /* Links um embaixo do outro */
+  flex-grow: 1; /* A lista "cresce" e ocupa o espaço vazio */
+  padding: 0; /* Remove padding padrão que pode atrapalhar */
+}
+
+/* 3. A MÁGICA: EMPURRE O .config PARA O FUNDO */
+.config {
+  margin-top: auto; /* Margem automática no topo empurra ele para baixo */
+
+  /* Adiciona uma borda para separar visualmente */
+  border-top: 1px solid rgba(0,0,0,0.1); 
+}
+
+/* O RESTO DO SEU CSS CONTINUA NORMAL 
+*/
+
 /* Estiliza o link que está ativo no momento */
 .active-link {
-  background-color: #3f51b5; /* Cor primária do seu app */
+  background-color: #3f51b5; 
   color: white;
 
-  /* Muda a cor do ícone quando o link está ativo */
- mat-icon[matListItemIcon] {
-font-size: 28px !important; 
-  height: 28px !important;
-  width: 28px !important;
-  font-variation-settings: 'FILL' 0;
+  mat-icon[matListItemIcon] {
+    color: white; /* Muda o ícone quando o link está ativo */
   }
 }
 
-.icon-menu{
-    font-size: 28px !important; 
-    height: 28px !important;
-    width: 28px !important;
-    cursor: pointer;
-    font-variation-settings: 'FILL' 0;
+/* Estilo para TODOS os ícones da lista (exceto o do link ativo) */
+mat-icon[matListItemIcon] {
+  /* O seu código de tamanho que já funcionava */
+  font-size: 28px; 
+  height: 28px;
+  width: 28px;
+  font-variation-settings: 'FILL' 0;
 }
+
+.icon-menu{
+  font-size: 28px; 
+  height: 28px;
+  width: 28px;
+  cursor: pointer;
+  font-variation-settings: 'FILL' 0;
+}
+
+/* APAGUE ESTAS REGRAS INÚTEIS */
+/*
+.config{
+    height:100px;
+}
+.mat-nav-list[config]{
+  margin-bottom: 100px;
+}
+*/
