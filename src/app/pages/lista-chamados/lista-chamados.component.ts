@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NavbarComponent } from '../../Components/navbar/navbar.component';
 import { FilterComponent } from '../../Components/filter/filter.component';
 // Importações do Angular Material
 import { MatCardModule } from '@angular/material/card';
@@ -15,7 +14,6 @@ import { MatIconModule } from '@angular/material/icon';
     MatCardModule,
     MatButtonModule,
     MatIconModule,
-    NavbarComponent,
     FilterComponent
   ],
   templateUrl: './lista-chamados.component.html',
@@ -47,7 +45,7 @@ export class ListaChamadosComponent {
   filteredChamados = [...this.chamados];
 
   onFilterChange(filter: { search?: string; status?: string }) {
-    const search = (filter.search || '').toLowerCase().trim();
+    const search = (filter.search || '').toLowerCase().trim();//pega o texto do filtro e transforma em minusculo e tira espaços, SENAO TIVER NADA FICA ""
     const status = filter.status || 'all';
 
     this.filteredChamados = this.chamados.filter((c) => {

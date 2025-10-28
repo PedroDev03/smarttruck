@@ -33,8 +33,11 @@ export class AppComponent {
   constructor() {
     // 2. UMA ÚNICA INSCRIÇÃO para controlar o layout
     this.router.events.pipe(
-      filter(event => event instanceof NavigationEnd)
-    ).subscribe(event => {
+      filter(
+        event => event instanceof NavigationEnd
+      )
+    ).subscribe(
+      event => {
       if (event instanceof NavigationEnd) {
         // Se a URL for '/login', esconde o layout. Senão, mostra.
         this.showLayout = (event.url !== '/login');

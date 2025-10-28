@@ -1,0 +1,66 @@
+<!-- 1. O card branco que fica no meio da área azul -->
+<div class="page-container">
+
+  <!-- 2. O cabeçalho (igual ao da tela de chamados) -->
+  <header class="page-header">
+    <h2>Criar Novo Usuário</h2>
+  </header>
+
+  <!-- 
+    [formGroup]="userForm"  <-- Conecta o <form> ao "Estado" (o seu useState)
+    (ngSubmit)="onSubmit()" <-- Chama o seu "handleSubmit"
+  -->
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="user-form">
+
+    <!-- CAMPO NOME -->
+    <mat-form-field appearance="outline">
+      <mat-label>Nome Completo</mat-label>
+      <input matInput formControlName="name" placeholder="Ex: João Bocó da Silva">
+      <mat-error *ngIf="userForm.get('name')?.touched && userForm.get('name')?.invalid">
+        Nome é obrigatório (mín. 3 letras).
+      </mat-error>
+    </mat-form-field>
+
+    <!-- CAMPO EMAIL -->
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" placeholder="Ex: bocozao@smarttruck.com">
+       <mat-error *ngIf="userForm.get('email')?.touched && userForm.get('email')?.invalid">
+        Email inválido, meu mano.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- CAMPO TELEFONE -->
+    <mat-form-field appearance="outline">
+      <mat-label>Telefone</mat-label>
+      <input matInput formControlName="phone" placeholder="Ex: (62) 99999-9999">
+       <mat-error *ngIf="userForm.get('phone')?.touched && userForm.get('phone')?.invalid">
+        Telefone é obrigatório.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- CAMPO SENHA (com o bônus de "ver senha") -->
+    <mat-form-field appearance="outline">
+      <mat-label>Senha</mat-label>
+      <input matInput 
+             formControlName="password" 
+             [type]="hidePassword ? 'password' : 'text'">
+      <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" type="button">
+        <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+      <mat-error *ngIf="userForm.get('password')?.touched && userForm.get('password')?.invalid">
+        Senha é obrigatória (mín. 6 letras).
+      </mat-error>
+    </mat-form-field>
+
+    <!-- BOTÃO SUBMIT -->
+    <button mat-flat-button 
+            color="primary" 
+            type="submit" 
+            [disabled]="userForm.invalid"
+            class="submit-button">
+      Salvar Usuário
+    </button>
+  </form>
+
+</div>

@@ -3,6 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from '../../shared/models/user.model' // Importa nosso modelo
 
+
+import { CreateUserRequest, CreateUserResponse } from '../../shared/models/user.dto';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -18,7 +21,9 @@ export class UserService {
   getUsers(): Observable<User[]> {
     return this.http.get<User[]>(this.apiUrl);
   }
-
+  createUser(user: User) : Observable<User>{
+    return this.http.post<User>(this.apiUrl, user);
+  }
   
   // FUTURAMENTE, VOCÊ ADICIONARIA OUTROS MÉTODOS AQUI:
   // getUserById(id: number): Observable<User> { ... }
