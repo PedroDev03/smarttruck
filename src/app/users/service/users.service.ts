@@ -7,7 +7,7 @@ import { User } from '../../shared/models/user.model' // Importa nosso modelo
   providedIn: 'root'
 })
 export class UserService {
-  private apiUrl = 'http://localhost:8080/api/users'; // URL base para usuários
+  private apiUrl = 'http://localhost:8080/api/auth/users'; // URL base para usuários
 
   constructor(private http: HttpClient) { }
 
@@ -19,6 +19,7 @@ export class UserService {
     return this.http.get<User[]>(this.apiUrl);
   }
 
+  
   // FUTURAMENTE, VOCÊ ADICIONARIA OUTROS MÉTODOS AQUI:
   // getUserById(id: number): Observable<User> { ... }
   // createUser(user: any): Observable<User> { ... }
