@@ -15,7 +15,7 @@
     <!-- CAMPO NOME -->
     <mat-form-field appearance="outline">
       <mat-label>Nome Completo</mat-label>
-      <input matInput formControlName="name" placeholder="Ex: João Bocó da Silva">
+      <input matInput formControlName="name">
       <mat-error *ngIf="userForm.get('name')?.touched && userForm.get('name')?.invalid">
         Nome é obrigatório (mín. 3 letras).
       </mat-error>
@@ -24,9 +24,9 @@
     <!-- CAMPO EMAIL -->
     <mat-form-field appearance="outline">
       <mat-label>Email</mat-label>
-      <input matInput formControlName="email" placeholder="Ex: bocozao@smarttruck.com">
+      <input matInput formControlName="email" placeholder="Ex: joao@smarttruck.com">
        <mat-error *ngIf="userForm.get('email')?.touched && userForm.get('email')?.invalid">
-        Email inválido, meu mano.
+        Email inválido.
       </mat-error>
     </mat-form-field>
 

@@ -11,7 +11,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 
 // 2. Importa o seu "Trampo Sujo"
-import { UserService } from '../../users/service/users.service';
+import { UserService } from '../../../users/service/users.service';
 
 @Component({
   selector: 'app-criar-usuario',
@@ -71,12 +71,12 @@ export class CriarUsuarioComponent {
 
       // FALHA (o seu .catch() ou catch{})
       error: (err) => {
-        console.error('DEU MERDA, BOCOZÃO:', err);
+        console.error('deu errado:', err);
         // A API pode retornar um erro específico
         if (err.status === 400) {
-          alert('Dados inválidos. Talvez o email já exista?');
+          alert('Dados inválidos.');
         } else {
-          alert('A porra da API quebrou. Tente de novo.');
+          alert('A API quebrou. Tente de novo.');
         }
       }
     });

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FilterComponent } from '../../Components/filter/filter.component';
+import { FilterComponent } from '../../../Components/filter/filter.component';
 // Importações do Angular Material
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';

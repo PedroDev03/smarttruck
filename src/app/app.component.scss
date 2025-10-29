@@ -15,7 +15,7 @@ app-navbar {
 
 /* Esta é a nova classe que você criou no HTML */
 .main-content-area {
-  flex-grow: 1; /* Faz esta área ocupar TODO o espaço restante (abaixo da navbar) */
+  // flex-grow: ; /* Faz esta área ocupar TODO o espaço restante (abaixo da navbar) */
   overflow-y: auto; /* Adiciona scroll SÓ aqui, se o conteúdo for muito grande */
   
   /* --- AQUI ESTÁ A LÓGICA --- */

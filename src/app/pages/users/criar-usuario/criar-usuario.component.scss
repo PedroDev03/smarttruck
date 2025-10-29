@@ -30,7 +30,10 @@
     font-weight: 500;
   }
 }
-
+mat-error{
+  color:red;
+  font-size: 13px;
+}
 /* 2. ESTILO NOVO SÓ PARA O FORMULÁRIO
 */
 .user-form {
@@ -49,8 +52,12 @@
   padding: 1.25rem 0; /* Botão mais altão */
   font-size: 1rem;
   font-weight: 500;
-  
+  background-color:#284e80 ;
+  color: #ffffff;
   /* Descomente se quiser o botão só no canto */
   /* align-self: flex-start; 
      width: 200px; */
+}
+input{
+  padding-left: 10px;
 }

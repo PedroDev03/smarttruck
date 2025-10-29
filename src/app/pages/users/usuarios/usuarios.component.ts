@@ -10,8 +10,8 @@ import { MatIconModule } from '@angular/material/icon';
 // 2. Importa o "Trampo Sujo" (UserService)
 // **** ATENÇÃO, BOCOZÃO: Verifique se este caminho está certo! ****
 // Você tinha "users/service/users.service" antes.
-import { UserService } from '../../users/service/users.service';
-import { User } from '../../shared/models/user.model'; // (Assumindo que você tem isso)
+import { UserService } from '../../../users/service/users.service';
+import { User } from '../../../shared/models/user.model'; // (Assumindo que você tem isso)
 
 @Component({
   selector: 'app-usuarios', // <-- Seletor
