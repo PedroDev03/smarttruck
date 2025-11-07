@@ -1,17 +1,20 @@
 
-<div class="page-container">
+ <div class="page-container">
     <header class="page-header">
       <h2>lista de usuarios</h2>
-      <!-- <button mat-icon-button aria-label="Filtrar chamados">
+ <button mat-icon-button aria-label="Filtrar usuarios">
         <mat-icon>tune</mat-icon>
-      </button> -->
+      </button> 
+      
     </header>
   
-    <app-filter (filterChange)="onFilterChange($event)"></app-filter>
+    <!-- <app-filter (filterChange)="onFilterChange($event)"></app-filter> -->
   
     <div class="usuario-list">
-      <mat-card class="usuario-card" *ngFor="let chamado of filteredChamados">
-        <div class="usuario-layout">
+    
+ <mat-card class="usuario-card"  *ngFor="let usuario of usuarios">   
+  <!--*ngFor="let chamado of filteredChamados"> -->
+         <div class="usuario-layout">
           <div class="usuario-image-placeholder"></div>
           
           <div class="usuario-details">
@@ -34,3 +37,4 @@
     </footer>
   
   </div>
+  -->

@@ -38,6 +38,7 @@ export class UsuariosComponent implements OnInit { // <-- CLASSE
   // 6. O "useEffect(..., [])" - Roda 1 vez para buscar os dados
   ngOnInit(): void {
     this.carregarUsuarios();
+    
   }
 
   // 7. O "Handler" para buscar os usuários
@@ -47,6 +48,7 @@ export class UsuariosComponent implements OnInit { // <-- CLASSE
       next: (data) => {
         // "Seta" o estado com os dados da API
         this.usuarios = data;
+        console.log('Usuários carregados:', this.usuarios);
       },
       error: (err) => {
         console.error('deu ruim p BUSCAR USUÁRIOS:', err);
@@ -60,5 +62,31 @@ export class UsuariosComponent implements OnInit { // <-- CLASSE
   irParaNovoUsuario(): void {
     this.router.navigate(['/novo-usuario']); // <-- Rota do seu app.routes.ts
   }
+
+ 
+  /* filtered view
+  filteredChamados = [...this.chamados];
+
+  onFilterChangeUser(filter: { search?: string; status?: string }) {
+    const search = (filter.search || '').toLowerCase().trim();//pega o texto do filtro e transforma em minusculo e tira espaços, SENAO TIVER NADA FICA ""
+    const status = filter.status || 'all';
+
+    this.filteredChamados = this.chamados.filter((c) => {
+      const matchesSearch = !search || (
+        (c.titulo && c.titulo.toLowerCase().includes(search)) ||
+        (c.descricao && c.descricao.toLowerCase().includes(search)) ||
+        (c.status && c.status.toLowerCase().includes(search))
+      );
+
+      // For demo data, status values are free-form; in real app adapt accordingly
+      const matchesStatus = status === 'all' || (c.status && c.status.toLowerCase().includes(status));
+
+      return matchesSearch && matchesStatus;
+    });
+  }
+
+}
+
+*/
 }
 
