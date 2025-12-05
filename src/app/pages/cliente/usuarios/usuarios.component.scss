@@ -1,0 +1,129 @@
+/* 1. CSS "BOCOZÃO" - Padrão do projeto */
+/* Garante que o componente se encaixa no layout azul */
+:host {
+    display: block;
+  }
+  
+  /* O card branco principal (copiado do estilo de chamados) */
+  .page-container {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    width: 950px; /* Largura padrão das suas telas */
+    max-width: 100%;
+  }
+  
+  /* 2. Cabeçalho (copiado do estilo de chamados) */
+  .page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 1rem;
+    
+    h2 {
+      margin: 0;
+      font-size: 1.5rem;
+      font-weight: 500;
+    }
+  
+    mat-icon {
+      transform: scale(1.5); 
+    }
+  }
+  
+  /* 3. Estilos da Lista de Usuários (copiado de .ticket-list) */
+  .usuario-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem; /* Espaço entre os cards */
+  }
+  
+  /* Estilos do Card (copiado de .ticket-card) */
+  .usuario-card {
+    /* Removemos o preenchimento padrão do mat-card para controlar com nosso layout */
+    padding: 0;
+  }
+  
+  /* Layout interno do Card (copiado de .ticket-layout) */
+  .usuario-layout {
+    display: flex;
+    align-items: flex-start;
+    padding: 1.5rem; /* Nosso preenchimento interno */
+  }
+  
+//   .usuario-imagem{
+//     padding: 15px;
+//     height: 10px;
+//   }
+
+  .usuario-imagem mat-icon {
+    font-size: 45px;
+    color: #1976d2;
+    height: 55px;
+    width: 50px;
+  }
+//   /* Placeholder da Imagem (copiado de .ticket-image-placeholder) */
+//   .usuario-image-placeholder {
+//     width: 80px; /* Um pouco menor para diferenciar de "chamado" */
+//     height: 80px;
+//     background-color: #e0e0e0;
+//     border-radius: 8px; /* Mantenha quadrado para bater com o estilo */
+//     margin-right: 1.5rem;
+//     flex-shrink: 0; /* Impede que o placeholder encolha */
+//   }
+  
+  /* Detalhes (copiado de .ticket-details) */
+  .usuario-details {
+    flex: 1;
+    margin-left: 15px;
+    mat-card-title {
+      font-size: 1.2rem;
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+    
+    mat-card-subtitle {
+      font-size: 0.9rem;
+      color: #6c757d;
+      margin-bottom: 1rem;
+    }
+  
+    mat-card-actions {
+      /* Alinha os botões "editar" */
+      padding: 0;
+      margin-top: 1rem;
+    }
+  }
+  
+  /* 4. Estilos da Paginação (copiado do estilo de chamados) */
+  .pagination-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #eee;
+  
+    button {
+      min-width: 40px;
+      width: 40px;
+      height: 40px;
+      padding: 0;
+      border-radius: 8px;
+  
+      &.active {
+        background-color: #f4f4f4;
+        border-color: #ccc;
+        font-weight: bold;
+      }
+    }
+  
+    span {
+      margin: 0 0.5rem;
+      color: #999;
+    }
+  }
