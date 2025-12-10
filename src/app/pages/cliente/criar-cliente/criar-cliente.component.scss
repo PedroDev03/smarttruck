@@ -1,0 +1,63 @@
+/* 1. CSS "BOCOZÃO" - COPIADO DA SUA TELA DE CHAMADOS
+  Isso garante que o componente não vai quebrar o layout azul.
+*/
+:host {
+  display: block;
+}
+
+/* O card branco principal */
+.page-container {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  width: 950px; /* Largura padrão das suas telas */
+  max-width: 100%;
+}
+
+/* O cabeçalho (igual ao da tela de chamados) */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 1rem;
+
+  h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 500;
+  }
+}
+mat-error {
+  color: red;
+  font-size: 13px;
+}
+/* 2. ESTILO NOVO SÓ PARA O FORMULÁRIO
+*/
+.client-form {
+  display: flex;
+  flex-direction: column; /* Coloca os campos um embaixo do outro */
+  gap: 1rem; /* Espaço entre os campos */
+}
+
+/* Faz os campos de input ocuparem 100% da largura do card */
+.client-form mat-form-field {
+  width: 100%;
+}
+
+/* Estiliza o botão */
+.submit-button {
+  padding: 1.25rem 0; /* Botão mais altão */
+  font-size: 1rem;
+  font-weight: 500;
+  background-color: #284e80;
+  color: #ffffff;
+  /* Descomente se quiser o botão só no canto */
+  /* align-self: flex-start; 
+     width: 200px; */
+}
+input {
+  padding-left: 10px;
+}
