@@ -1,11 +1,9 @@
 /* :host garante que os estilos de fundo cubram toda a área do componente, 
    simulando o fundo azul onde o container branco fica */
 :host {
-  /* O host não precisa de quase nada. 
-     Apenas garanta que ele ocupe a largura disponível. */
-  display: block;
-
-}
+    display: block;
+     min-height: calc(100vh); 
+  }
  
 .page-container {
   background-color: #ffffff;

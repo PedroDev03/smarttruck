@@ -44,8 +44,8 @@ export class UsuariosComponent implements OnInit { // <-- CLASSE
 
   // 7. O "Handler" para buscar os usuários
 carregarUsuarios(): void {
-    this.userService.getUsers().subscribe({
-      next: (data: any) => {
+ this.userService.getUsers().subscribe({
+ next: (data: any) => {
         
         // CORREÇÃO BASEADA NO SEU LOG:
         if (data.users) {
@@ -62,13 +62,13 @@ carregarUsuarios(): void {
             console.error('Formato desconhecido:', data);
         }
 
-        console.log('Lista carregada na tela:', this.usuarios);
-      },
-      error: (err) => {
-        console.error('Erro ao buscar:', err);
-      }
-    });
-  }
+console.log('Lista carregada na tela:', this.usuarios);
+},
+error: (err) => {
+ console.error('Erro ao buscar:', err);
+ }
+});
+}
  
   /* filtered view
   filteredChamados = [...this.chamados];
