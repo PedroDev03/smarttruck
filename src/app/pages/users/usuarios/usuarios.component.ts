@@ -10,6 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
 // 2. Importa o "Trampo Sujo" (UserService)
 // **** ATENÇÃO, BOCOZÃO: Verifique se este caminho está certo! ****
 // Você tinha "users/service/users.service" antes.
+
 import { UserService } from '../../../users/service/users.service';
 import { User } from '../../../shared/models/user.model'; // (Assumindo que você tem isso)
 
@@ -42,27 +43,32 @@ export class UsuariosComponent implements OnInit { // <-- CLASSE
   }
 
   // 7. O "Handler" para buscar os usuários
-  carregarUsuarios(): void {
-    // Chama o service
-    this.userService.getUsers().subscribe({
-      next: (data) => {
-        // "Seta" o estado com os dados da API
-        this.usuarios = data;
-        console.log('Usuários carregados:', this.usuarios);
-      },
-      error: (err) => {
-        console.error('deu ruim p BUSCAR USUÁRIOS:', err);
-        alert('A da API de listar usuários quebrou.');
-      }
-    });
-  }
+carregarUsuarios(): void {
+    this.userService.getUsers().subscribe({
+      next: (data: any) => {
+        
+        // CORREÇÃO BASEADA NO SEU LOG:
+        if (data.users) {
+            // O backend mandou { users: [...], metadata: ... }
+            this.usuarios = data.users;
+        } 
+        else if (Array.isArray(data)) {
+            // Caso o backend mande a lista pura
+            this.usuarios = data;
+        } 
+        else {
+            // Fallback
+            this.usuarios = [];
+            console.error('Formato desconhecido:', data);
+        }
 
-  // 8. Função para navegar para a página de "novo-usuario"
-  //    (Chamada pelo botão no seu usuarios.component.html)
-  irParaNovoUsuario(): void {
-    this.router.navigate(['/novo-usuario']); // <-- Rota do seu app.routes.ts
-  }
-
+        console.log('Lista carregada na tela:', this.usuarios);
+      },
+      error: (err) => {
+        console.error('Erro ao buscar:', err);
+      }
+    });
+  }
  
   /* filtered view
   filteredChamados = [...this.chamados];

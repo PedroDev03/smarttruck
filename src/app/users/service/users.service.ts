@@ -10,7 +10,7 @@ import { CreateUserRequest, CreateUserResponse } from '../../shared/models/user.
   providedIn: 'root'
 })
 export class UserService {
-  private apiUrl = 'http://localhost:8080/api/auth/users'; // URL base para usuários
+  private apiUrl = 'http://localhost:8080/api/users'; // URL base para usuários
 
   constructor(private http: HttpClient) { }
 
