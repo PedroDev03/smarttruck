@@ -2,6 +2,10 @@
  <div class="page-container">
     <header class="page-header">
       <h2>lista de usuarios</h2>
+       <a routerLink="/novo-usuario" routerLinkActive="active-link">
+        <mat-icon>person_add</mat-icon>
+        Novo Usuário
+        </a>
  <button mat-icon-button aria-label="Filtrar usuarios">
         <mat-icon>tune</mat-icon>
       </button> 
@@ -19,13 +23,15 @@
             <mat-icon>assignment_ind</mat-icon>
           </div>
           
-          <div class="usuario-details">
-            <mat-card-title>{{ usuario.name }}</mat-card-title>
-            <mat-card-subtitle>{{ usuario.email }}</mat-card-subtitle>
-            <mat-card-actions>
-              <button mat-flat-button color="primary">editar</button>
-            </mat-card-actions>
-          </div>
+    <div class="usuario-details">
+    <mat-card-title>{{ usuario.name }}</mat-card-title>
+    <mat-card-subtitle>{{ usuario.email }}</mat-card-subtitle>
+    <mat-card-actions>
+        <button mat-flat-button color="primary" (click)="abrirDialogoEdicao(usuario)">
+            editar
+        </button>
+    </mat-card-actions>
+</div>
         </div>
       </mat-card>
     </div>

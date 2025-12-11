@@ -1,98 +1,90 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router'; // Adicionei RouterModule para o routerLink funcionar
 
-// 1. Importa os módulos do Material para a lista e o HTML
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-
-// 2. Importa o "Trampo Sujo" (UserService)
-// **** ATENÇÃO, BOCOZÃO: Verifique se este caminho está certo! ****
-// Você tinha "users/service/users.service" antes.
+// 1. IMPORTAR O MAT DIALOG
+import { MatDialog, MatDialogModule } from '@angular/material/dialog'; 
 
 import { UserService } from '../../../users/service/users.service';
-import { User } from '../../../shared/models/user.model'; // (Assumindo que você tem isso)
+import { User } from '../../../shared/models/user.model';
+// 2. IMPORTAR O NOVO COMPONENTE CRIADO
+import { EditarUsuarioDialogComponent } from './editar-usuario-dialog.component'; 
 
 @Component({
-  selector: 'app-usuarios', // <-- Seletor
+  selector: 'app-usuarios',
   standalone: true,
-  // 3. Imports que o HTML (usuarios.component.html) usa
   imports: [
-    CommonModule,     // Para *ngIf e *ngFor
+    CommonModule,
     MatCardModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatDialogModule, // Não esqueça de importar o módulo do dialog
+    RouterModule     // Importante para o routerLink funcionar
   ],
-  templateUrl: './usuarios.component.html', // <-- TEMPLATE (já existe)
-  styleUrls: ['./usuarios.component.scss']  // <-- ESTILO (já existe)
+  templateUrl: './usuarios.component.html',
+  styleUrls: ['./usuarios.component.scss']
 })
-export class UsuariosComponent implements OnInit { // <-- CLASSE
+export class UsuariosComponent implements OnInit {
 
-  // 4. O "Estado" (State) para guardar a lista de usuários
   usuarios: User[] = [];
 
-  // 5. "Injeta" (Pede) as ferramentas
   private userService = inject(UserService);
   private router = inject(Router);
+  // 3. INJETAR O DIALOG
+  private dialog = inject(MatDialog); 
 
-  // 6. O "useEffect(..., [])" - Roda 1 vez para buscar os dados
   ngOnInit(): void {
     this.carregarUsuarios();
-    
   }
 
-  // 7. O "Handler" para buscar os usuários
-carregarUsuarios(): void {
- this.userService.getUsers().subscribe({
- next: (data: any) => {
-        
-        // CORREÇÃO BASEADA NO SEU LOG:
+  carregarUsuarios(): void {
+    this.userService.getUsers().subscribe({
+      next: (data: any) => {
         if (data.users) {
-            // O backend mandou { users: [...], metadata: ... }
-            this.usuarios = data.users;
-        } 
-        else if (Array.isArray(data)) {
-            // Caso o backend mande a lista pura
-            this.usuarios = data;
-        } 
-        else {
-            // Fallback
-            this.usuarios = [];
-            console.error('Formato desconhecido:', data);
+          this.usuarios = data.users;
+        } else if (Array.isArray(data)) {
+          this.usuarios = data;
+        } else {
+          this.usuarios = [];
         }
-
-console.log('Lista carregada na tela:', this.usuarios);
-},
-error: (err) => {
- console.error('Erro ao buscar:', err);
- }
-});
-}
- 
-  /* filtered view
-  filteredChamados = [...this.chamados];
-
-  onFilterChangeUser(filter: { search?: string; status?: string }) {
-    const search = (filter.search || '').toLowerCase().trim();//pega o texto do filtro e transforma em minusculo e tira espaços, SENAO TIVER NADA FICA ""
-    const status = filter.status || 'all';
-
-    this.filteredChamados = this.chamados.filter((c) => {
-      const matchesSearch = !search || (
-        (c.titulo && c.titulo.toLowerCase().includes(search)) ||
-        (c.descricao && c.descricao.toLowerCase().includes(search)) ||
-        (c.status && c.status.toLowerCase().includes(search))
-      );
-
-      // For demo data, status values are free-form; in real app adapt accordingly
-      const matchesStatus = status === 'all' || (c.status && c.status.toLowerCase().includes(status));
-
-      return matchesSearch && matchesStatus;
+      },
+      error: (err) => console.error('Erro ao buscar:', err)
     });
   }
 
-}
+  // 4. NOVA FUNÇÃO: ABRE A JANELA DE EDIÇÃO
+  abrirDialogoEdicao(usuario: User): void {
+    const dialogRef = this.dialog.open(EditarUsuarioDialogComponent, {
+      width: '400px', // Largura da janela
+      data: usuario   // Envia o usuário clicado para dentro da janela
+    });
 
-*/
+    // 5. QUANDO A JANELA FECHAR (SALVAR)
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log('Dados editados:', result);
+        
+        // AQUI VOCÊ CHAMA O SERVIÇO DE UPDATE (QUANDO TIVER NO BACKEND)
+        // Exemplo:
+        /*
+        this.userService.updateUser(result.id, result).subscribe({
+           next: () => {
+             alert('Usuário atualizado!');
+             this.carregarUsuarios(); // Recarrega a lista
+           },
+           error: (e) => alert('Erro ao atualizar')
+        });
+        */
+       
+        // POR ENQUANTO (SÓ FRONT): ATUALIZA A LISTA VISUALMENTE
+        const index = this.usuarios.findIndex(u => u.id === result.id);
+        if (index !== -1) {
+            this.usuarios[index] = result;
+        }
+      }
+    });
+  }
 }
-

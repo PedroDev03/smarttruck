@@ -2,7 +2,8 @@
   Isso garante que o componente não vai quebrar o layout azul.
 */
 :host {
-  display: block;
+    display: block;
+     min-height: calc(100vh); 
 }
 
 /* O card branco principal */
