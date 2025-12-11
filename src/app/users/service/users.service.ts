@@ -24,7 +24,14 @@ export class UserService {
   createUser(user: User) : Observable<User>{
     return this.http.post<User>(this.apiUrl, user);
   }
-  
+  updateUser(id: string, user: any): Observable<User> {
+    // Chama o PUT http://localhost:8080/api/users/{id}
+    return this.http.put<User>(`${this.apiUrl}/${id}`, user);
+  }
+
+  deleteUser(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
   // FUTURAMENTE, VOCÊ ADICIONARIA OUTROS MÉTODOS AQUI:
   // getUserById(id: number): Observable<User> { ... }
   // createUser(user: any): Observable<User> { ... }

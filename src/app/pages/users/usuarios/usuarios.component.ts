@@ -7,7 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 // 1. IMPORTAR O MAT DIALOG
 import { MatDialog, MatDialogModule } from '@angular/material/dialog'; 
-
+import {ConfirmacaoDialogComponent} from './desativar-confirmacao-dialog.component';
 import { UserService } from '../../../users/service/users.service';
 import { User } from '../../../shared/models/user.model';
 // 2. IMPORTAR O NOVO COMPONENTE CRIADO
@@ -55,36 +55,69 @@ export class UsuariosComponent implements OnInit {
     });
   }
 
-  // 4. NOVA FUNÇÃO: ABRE A JANELA DE EDIÇÃO
+  // ... imports e configs anteriores ...
+
   abrirDialogoEdicao(usuario: User): void {
     const dialogRef = this.dialog.open(EditarUsuarioDialogComponent, {
-      width: '400px', // Largura da janela
-      data: usuario   // Envia o usuário clicado para dentro da janela
+      width: '400px',
+      data: usuario // Passa o usuário atual para o modal
     });
 
-    // 5. QUANDO A JANELA FECHAR (SALVAR)
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        console.log('Dados editados:', result);
+    dialogRef.afterClosed().subscribe(usuarioEditado => {
+      // Se o usuário clicou em "Salvar", usuarioEditado virá preenchido
+      if (usuarioEditado) {
         
-        // AQUI VOCÊ CHAMA O SERVIÇO DE UPDATE (QUANDO TIVER NO BACKEND)
-        // Exemplo:
-        /*
-        this.userService.updateUser(result.id, result).subscribe({
-           next: () => {
-             alert('Usuário atualizado!');
-             this.carregarUsuarios(); // Recarrega a lista
-           },
-           error: (e) => alert('Erro ao atualizar')
+        // 1. Chama o Backend para salvar de verdade
+        this.userService.updateUser(usuarioEditado.id, usuarioEditado).subscribe({
+          next: (response) => {
+            console.log('Usuário atualizado no banco:', response);
+            
+            // 2. Atualiza a lista na tela visualmente (sem precisar recarregar tudo)
+            // Encontra o índice do usuário antigo na lista
+            const index = this.usuarios.findIndex(u => u.id === usuarioEditado.id);
+            if (index !== -1) {
+              // Substitui o antigo pelo novo que veio do banco
+              this.usuarios[index] = response; 
+            }
+            
+            alert('Usuário atualizado com sucesso!');
+          },
+          error: (err) => {
+            console.error('Erro ao atualizar:', err);
+            alert('Erro ao tentar atualizar o usuário.');
+          }
         });
-        */
-       
-        // POR ENQUANTO (SÓ FRONT): ATUALIZA A LISTA VISUALMENTE
-        const index = this.usuarios.findIndex(u => u.id === result.id);
-        if (index !== -1) {
-            this.usuarios[index] = result;
-        }
       }
     });
   }
+
+abrirDialogoConfirmacao(usuario: User): void {
+    const dialogRef = this.dialog.open(ConfirmacaoDialogComponent, {
+      width: '350px',
+      data: { mensagem: 'Quer mesmo desativar este funcionário?' }
+    });
+
+    dialogRef.afterClosed().subscribe(confirmado => {
+      if (confirmado) {
+        // Se o usuário clicou em "Sim", chamamos o backend
+        this.desativarUsuario(usuario);
+      }
+    });
+  }
+
+desativarUsuario(usuario: User): void {
+    // Adicione o .toString() aqui
+    this.userService.deleteUser(usuario.id.toString()).subscribe({
+      next: () => {
+        this.usuarios = this.usuarios.filter(u => u.id !== usuario.id);
+        alert('Funcionário desativado com sucesso.');
+      },
+      error: (err) => {
+        console.error('Erro ao desativar:', err);
+        alert('Erro ao tentar desativar o funcionário.');
+      }
+    });
+  }
+
+
 }
