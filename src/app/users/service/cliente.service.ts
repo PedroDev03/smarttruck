@@ -8,7 +8,7 @@ import { Cliente } from '../../shared/models/cliente.model copy';
   providedIn: 'root',
 })
 export class ClienteService {
-  private apiUrl = 'http://localhost:8080/api/clientes/criarCliente'; // URL base para clientes
+  private apiUrl = 'http://localhost:8080/api/clients'; // URL base para clientes
 
   constructor(private http: HttpClient) {}
 
